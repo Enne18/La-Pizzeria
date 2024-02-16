@@ -199,6 +199,10 @@ footer p {
   color: #fff;
 }
 
+hr{
+  visibility: hidden;
+}
+
 #details {
   margin-top: 5%;
 }
