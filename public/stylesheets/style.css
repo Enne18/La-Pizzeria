@@ -1,0 +1,380 @@
+.navbar {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .nav-item .nav-link {
+  line-height: normal;
+}
+
+#TitoloPrincipale {
+  color: red;
+  font-weight: bold;
+  font-family: 'BioRhyme';
+  font-size: 4rem;
+  margin-left: 10px;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+hgroup,
+.vote,
+button,
+span,
+label,
+input,
+td,
+th,
+textarea {
+  font-family: 'BioRhyme';
+}
+
+.bordato {
+  color: #000; /* Set the main text color */
+    text-shadow:
+        -1px -1px 0 #fff,  
+         1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+         1px 1px 0 #fff;
+}
+
+p,
+a,
+.vote,
+span,
+label,
+input,
+td,
+th {
+  font-size: 20px;
+}
+
+table {
+  text-align: center;
+}
+
+body {
+  /* background-color: #febd3a; */
+  background-image: url("/images/top-view-pizza-circular-frame.jpg");
+  background-size: cover;
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Impedisce lo scroll orizzontale */
+}
+
+.legenda h3,
+.legenda h2,
+.legenda p {
+  color: black;
+}
+
+
+a:hover {
+  text-decoration: none;
+}
+
+.access-form {
+  display: none;
+}
+
+.access-form:target {
+  display: block;
+  position: absolute;
+  height: 100%;
+  top: 0px;
+  right: 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.menu-image {
+  position: relative;
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.menu-image img {
+  transform: translateZ(50px);
+}
+
+.main-content {
+  padding-top: 3%;
+  /* Altezza tra foto e contenuto */
+}
+
+.carousel-item {
+  max-height: 350px;
+  overflow: hidden;
+}
+
+.content-box {
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  width: 150%;
+  transform: translateX(-40%);
+}
+
+.image-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-box img {
+  width: 400;
+  margin-bottom: 10px;
+  transform: translateY(-80px);
+}
+
+
+footer {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  bottom: 0;
+  width: 100%;
+  margin-top: auto;
+}
+
+footer p {
+  margin-bottom: 5px;
+}
+
+.image-container {
+  width: 100%;
+  max-width: 200px;
+  margin-right: 2rem;
+  margin-left: auto;
+  max-height: 150px;
+  overflow: hidden;
+}
+
+/* Stile per il titolo del modal */
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Stile per il campo del nome */
+#defaultForm-name {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Stile per il campo dell'email */
+#defaultForm-email {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Stile per il campo della password */
+#defaultForm-pass {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Stile per il pulsante di login */
+.btn-default {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+}
+
+/* Stile per il pulsante di login al passaggio del mouse */
+.btn-default:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+#details {
+  margin-top: 5%;
+}
+
+
+.modal-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.modal-body ul li {
+  margin-bottom: 10px;
+}
+
+.modal-body {
+  font-weight: bold;
+  font-family: 'BioRhyme';
+  font-size: larger;
+}
+
+.modal-body .price {
+  float: right;
+}
+
+.dettaglioPizzeria {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  line-height: 30px;
+}
+
+.bottoniDettagli {
+  flex-direction: row;
+  align-items: center;
+  line-height: 30px;
+}
+
+button a {
+  color: white;
+  text-decoration: none;
+}
+
+button a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+/* CSS ordine.html */
+
+/* .ordineHome {
+  text-align: center;
+  margin-top: 100px;
+} */
+
+form {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+label,
+input,
+select {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 5px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 10px;
+}
+
+.grid-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.inviaOrdine {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 30%;
+}
+
+.grid-container input {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* .registrazioneHome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.registrazioneHome h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.registrazioneHome form {
+  width: 500px;
+}
+
+.registrazioneHome label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.registrazioneHome input,
+.registrazioneHome select,
+.registrazioneHome textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.registrazioneHome input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.registrazioneHome input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.registrazioneHome textarea {
+  height: 100px;
+} */
+
+/* .arearegistrata {
+  margin-top: 50px;
+} */
+
+.pizza-fields {
+  display: flex;
+}
+
+.pizza-fields > div {
+  margin-right: 10px;
+}
+
+.below-nav {
+  margin-top: 6rem;
+}
+
+iframe{
+  width: 110%;
+}
+
+#cardRestaurantBG{
+  background-color: rgba(255, 255, 255, 0.5);
+  padding-top: 10px;
+  border-radius: 15px;
+}

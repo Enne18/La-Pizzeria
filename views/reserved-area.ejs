@@ -1,0 +1,119 @@
+<%-include('headerIndex')-%>
+
+    <div class="container mt-5 bordato">
+        <h2 class="arearegistrata">Informazioni Pizzeria</h2>
+        <form method="post" action="/reserved-area/<%= pizzeria.ID_Pizzeria %>">
+            <div class="form-group">
+                <label for="inputNome">Nome della pizzeria</label>
+                <input type="text" class="form-control" name="nome" value="<%= pizzeria.Nome %>">
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="inputCittà">Città della pizzeria</label>
+                    <input type="text" class="form-control" name="citta" value="<%= pizzeria.Città %>">
+                </div>
+                <label for="inputIndirizzo">Indirizzo della pizzeria</label>
+                <input type="text" class="form-control" name="indirizzo" value="<%= pizzeria.Indirizzo %>">
+            </div>
+            <div class="form-group">
+                <label for="inputTelefono">Numero di telefono</label>
+                <input type="number" class="form-control" name="numero" value="<%= pizzeria.Telefono %>">
+            </div>
+            <div class="form-group">
+                <label for="inputGGhhApertura">Giorni e orari di apertura:</label>
+                <input type="text" class="form-control" name="GGhhApertura" value="<%= pizzeria.Orari %>">
+            </div>
+            <div class="form-group">
+                <label for="inputCategoria">Categoria</label>
+                <input type="text" class="form-control" name="categoria" value="<%= pizzeria.Tipologia %>">
+            </div>
+            <br><label for="googleMapsLink">Google Maps Link per la mappa:</label>
+            <input type="text" id="googleMapsLink" name="googleMapsLink" value="<%= pizzeria.GoogleMapsLink %>">
+
+            <div class="form-group">
+                <label for="inputImmagini">Immagini</label>
+                <input type="file" class="form-control-file" id="inputImmagini">
+            </div>
+            <button class="btn btn-primary btn-success" type="submit"><a>Salva modifiche</a></button>
+        </form>
+
+        <button class="btn btn-primary btn-danger"><a href="/menu/<%= pizzeria.ID_Pizzeria %>">Modifica il Menu qua</a></button>
+
+        <hr>
+
+        <h2>Prenotazioni</h2>
+        <div class="form-group">
+            <label for="inputData">Filtro per data</label>
+            <input type="date" class="form-control" id="inputData">
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome Cliente</th>
+                    <th>Data Prenotazione</th>
+                    <th>Ora Prenotazione</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nicholas Ternullo</td>
+                    <td>25-05-2023</td>
+                    <td>20:00</td>
+                    <td>
+                        <button class="btn btn-success btn-sm">Completato</button>
+                    </td>
+                </tr>
+                <!-- Altre righe per le prenotazioni -->
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>Ordinazioni</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome Cliente</th>
+                    <th>Indirizzo di consegna</th>
+                    <th>Ordine</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nicholas Ternullo</td>
+                    <td>Via del Duomo 6 Vercelli</td>
+                    <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#ordineModal">Visuaizza
+                            ordine</button></td>
+                    <td>
+                        <button class="btn btn-success btn-sm">Convalida</button>
+                        <button class="btn btn-danger btn-sm">Annulla</button>
+                    </td>
+                </tr>
+                <!-- Altre righe per le prenotazioni -->
+            </tbody>
+        </table>
+
+        <!-- Modal visualizzazione Ordine -->
+        <div class="modal fade" id="ordineModal" tabindex="-1" role="dialog" aria-labelledby="ordineModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h4 class="modal-title">Pizze</h4>
+                        <ul>
+                            <li>Pizza Margherita<span class="price"> x1</span></li>
+                            <li>Pizza Prosciutto e Funghi<span class="price"> x2</span></li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+    </div>
+    <%-include('footer')-%>

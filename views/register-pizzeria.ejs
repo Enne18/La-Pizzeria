@@ -1,0 +1,41 @@
+<%-include('headerIndex')-%>
+
+    <div class="row justify-content-center bordato">
+        <div class="col-md-6">
+
+            <h1>Registrazione Pizzeria</h1>
+
+            <form method="post" action="/register-pizzeria">
+                <label for="nome">Nome Pizzeria:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="indirizzo">Indirizzo:</label>
+                <input type="text" id="indirizzo" name="indirizzo" required>
+
+                <label for="citta">Città:</label>
+                <input type="text" id="citta" name="citta" required>
+
+                <label for="numero">Numero di telefono:</label>
+                <input type="text" id="numero" name="numero" required>
+
+                <label for="GGhhApertura">Giorni e orari di apertura:</label>
+                <input type="text" id="GGhhApertura" name="GGhhApertura" required>
+
+                <label for="categoria">Categoria:</label>
+                <input type="text" id="categoria" name="categoria" required>
+
+                <br><label for="emailAdmin">Email:</label>
+                <input type="text" id="emailAdmin" name="emailAdmin" required>
+
+                <label for="pswAdmin">Password:</label>
+                <input type="text" id="pswAdmin" name="pswAdmin" required><br><br>
+
+                <div class="col-6">
+                    <button class="btn btn-primary btn-success" type="submit"><a>Registrati</a></button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <br>
+    <%-include('footer')-%>

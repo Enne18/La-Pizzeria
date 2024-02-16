@@ -1,0 +1,48 @@
+<%-include('headerIndex')-%>
+
+  <hr>
+
+  <!-- Form di ricerca e Filtro -->
+  <div class="main-content">
+    <div class="row">
+      <div class="col-md-1 offset-md-1"></div>
+      <div class="col-md-6">
+        <form class="form-inline d-flex justify-content-start mt-3">
+          <div class="form-group mr-3">
+            <select class="form-control" name="citta">
+              <option value="">Qualsiasi città</option>
+              <option value="Vercelli">Vercelli</option>
+              <option value="Trino">Trino</option>
+            </select>
+          </div>
+          <div class="form-group mr-3">
+            <select class="form-control" name="tipo">
+              <option value="">Tutti i tipi</option>
+              <option value="ConsumazioneSulPosto">Consumazione sul posto</option>
+              <option value="RitiroEsterno">Ritiro all'esterno</option>
+              <option value="ConsegnaADomicilio">Consegna a domicilio</option>
+            </select>
+          </div>
+          <div class="form-group mr-3">
+            <input type="text" class="form-control" name="ricerca" placeholder="Ricerca">
+          </div>
+          <button type="submit" class="btn btn-default" data-toggle="modal" data-target="#modalLoginForm">
+            <a>Cerca</a>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <% pizzerias.forEach((pizzeria)=> { %>
+    <%- include('restaurant-card', {pizzeria}); -%>
+      <% }); %>
+
+
+
+
+
+
+        </div>
+        <%-include('footer')-%>
