@@ -182,7 +182,7 @@ exports.getALLPizza = function (id) {
     });
 };
 
-//inserisce le 5 pizze quando viene creata una pizzeria
+/* //inserisce le 5 pizze quando viene creata una pizzeria
 exports.insertPizza = function (pizza, pizzeriaID) {
     return new Promise((resolve, reject) => {
         const sql = 'INSERT INTO Pizza(Nome, ID_Pizzeria, Ingredienti, Prezzo, ID_Pizza) VALUES (?,?,?,?,?)';
@@ -211,6 +211,25 @@ exports.insertPizza = function (pizza, pizzeriaID) {
         }
 
         Promise.all(promises).then(resolve).catch(reject);
+    });
+}; */
+
+exports.insertPizza = function (pizza, pizzeriaID) {
+    return new Promise((resolve, reject) => {
+        const sql = 'INSERT INTO Pizza(Nome, ID_Pizzeria, Ingredienti, Prezzo, ID_Pizza) VALUES (?,?,?,?,?)';
+        db.run(sql, [
+            pizza.Nome || null,
+            pizzeriaID,
+            pizza.Ingredienti || null,
+            pizza.Prezzo || null,
+            pizza.ID_Pizza
+        ], function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(pizza);
+            }
+        });
     });
 };
 

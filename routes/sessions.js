@@ -38,12 +38,12 @@ router.post('/sessions', function (req, res, next) {
 });
 
 //gestisce il logout
-router.post('/logout', function (req, res, next) {
+router.post('/sessions/logout', function (req, res, next) {
   req.logout(function (err) {
     if (err) {
       return next(err);
     }
-    res.redirect('/', { auth: false });
+    res.redirect('/');
   });
 });
 

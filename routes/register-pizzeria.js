@@ -57,7 +57,7 @@ router.post('/', [
 
         console.log(pizzeria);
         pizzeriaDao.insertPizzeria(pizzeria);
-        pizzeriaDao.insertPizza(id);
+        //pizzeriaDao.insertPizza(id);
       });
 
       const auth = req.isAuthenticated();

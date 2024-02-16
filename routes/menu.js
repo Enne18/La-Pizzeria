@@ -14,9 +14,10 @@ router.get('/:ID_Pizzeria', function (req, res, next) {
   const auth = req.isAuthenticated();
   const user = req.user;
   pizzeriaDao.getPizzeriaByIdPizzeria(req.params.ID_Pizzeria).then((pizzeria) => {
-    res.render('menu', { auth, title: 'Express', pizzeria, message: null, user });
-
-  });
+    pizzeriaDao.getALLPizza(req.params.ID_Pizzeria).then((pizzas) => {
+        res.render('menu', { auth, title: 'Scheda'+' '+pizzeria.Nome, message: null, pizzeria, pizzas, user});
+    });
+});
 });
 
 router.post('/:ID_Pizzeria', async function (req, res, next) {

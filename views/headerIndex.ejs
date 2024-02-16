@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css?family=BioRhyme" rel="stylesheet">
   <!-- Personal JS
   <script deref src="/public/js/templates/nav-templates.js"></script>-->
-    <script defer src="/javascripts/logout.js"></script>
+  <script defer src="/javascripts/logout.js"></script>
 </head>
 
 <body>
@@ -82,8 +82,7 @@
   </nav>
 
   <!-- Form di login preso in parte da Bootstrap -->
-  <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true" aria-labelledby="myModalLabel">
     <form method="POST" action="/sessions">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -114,8 +113,8 @@
   </div>
 
   <!-- Form di registrazione preso in parte da Bootstrap -->
-  <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="modalRegisterForm" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="false">
     <form method="post" action="/signup">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -152,7 +151,7 @@
 
   <!-- Form di accesso all'area riservata -->
   <div class="modal fade" id="modalReservedAreaForm" tabindex="-1" role="dialog" aria-labelledby="modalReservedAreaForm"
-    aria-hidden="true">
+    aria-hidden="false">
     <form method="post" action="/sessions">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
