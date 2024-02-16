@@ -2,7 +2,6 @@
 
     <div class="row justify-content-center bordato">
         <div class="col-md-6" id="cardRestaurantBG">
-            <form method="post" action="/reserved-area/<%= pizzeria.ID_Pizzeria %>">
                 <!-- ... Altri campi di informazioni sulla pizzeria ... -->
 
                 <!-- Menu -->
@@ -12,21 +11,18 @@
                         <h3>Menu</h3>
                       </div>
                       <div class="col">
-                        <button class="btn btn-primary btn-success" type="submit"><a>Aggiungi Pizza</a></button>
-                      </div>
-                      <div class="col">
-                        <button class="btn btn-primary btn-danger" type="submit"><a>Rimuovi Pizza</a></button>
+                        <button class="btn btn-primary btn-success" data-toggle="modal" data-target="#nuovaPizza"><a>Aggiungi Pizza</a></button>
                       </div>
                     </div>
                   </div>
 
                 <hr>
                 <% pizzas.forEach((pizza, pizzeria)=> { %>
-                    <% if (pizza.ID_Pizzeria==pizzeria.ID_Pizzeria && pizza.PizzaNome !==null) { %>
+                    <% if (pizza.ID_Pizzeria == pizzeria.ID_Pizzeria && pizza.PizzaNome !== null) { %>
 
                         <div class="pizza-fields">
                             <div class="form-group">
-                                <label>Nome della Pizza:</label>
+                                <label>Nome:</label>
                                 <input type="text" class="form-control" value="<%= pizza.PizzaNome %>" name="Nome">
                             </div>
                             <div class="form-group">
@@ -35,16 +31,50 @@
                                     name="Ingredienti">
                             </div>
                             <div class="form-group">
-                                <label>Prezzo in Euro:</label>
+                                <label>Prezzo:</label>
                                 <input type="number" class="form-control" value="<%= pizza.Prezzo %>" name="Prezzo">
                             </div>
+                            <button class="btn btn-danger rimuoviButton" type="button">Rimuovi</button>
                         </div>
 
                         <% }}); %>
 
 
-            </form>
             <br>
         </div>
     </div>
+
+    <div class="modal fade" id="nuovaPizza" tabindex="-1" role="dialog" aria-hidden="false" aria-labelledby="myModalLabel">
+        <form method="POST" action="/menu">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Nuova Pizza</h4>
+              </div>
+              <div class="modal-body mx-3">
+                <div class="md-form mb-4">
+                  <label data-error="wrong" data-success="right" for="Nome">Nome:</label>
+                  <input type="text" id="Nome" class="form-control validate" name="Nome" required>
+                </div>
+    
+                <div class="md-form mb-4">
+                  <label data-error="wrong" data-success="right" for="Ingredienti">Ingredienti:</label>
+                  <input type="text" id="Ingredienti" class="form-control validate" name="Ingredienti" required>
+                </div>
+
+                <div class="md-form mb-4">
+                    <label data-error="wrong" data-success="right" for="Prezzo">Prezzo:</label>
+                    <input type="number" id="Prezzo" class="form-control validate" name="Prezzo" required>
+                  </div>
+    
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary"><a>Aggiungi</a></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
     <%- include('footer') %>

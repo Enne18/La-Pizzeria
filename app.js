@@ -85,7 +85,7 @@ app.use('/users', usersRouter);
 app.use('/restaurants', restaurantsRouter);
 app.use('/detail', detailRouter);
 app.use('/reserved-area', isLoggedIn, reservedRouter);
-app.use('/menu', menuRouter);
+app.use('/menu', isLoggedIn, menuRouter);
 app.use('/register-pizzeria', registerRouter);
 app.use('/signup', signupRouter);
 

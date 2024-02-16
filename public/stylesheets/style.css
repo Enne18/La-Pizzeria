@@ -239,6 +239,10 @@ hr{
   line-height: 30px;
 }
 
+.rimuoviButton{
+  max-height: 50px;
+}
+
 button a {
   color: white;
   text-decoration: none;
