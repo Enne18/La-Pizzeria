@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var pizzeriaDao = require('../modules/pizzeria-dao');
 const user = require('../modules/user-dao');
+const pren = require('../modules/prenotazioni-dao');
 const { check, validationResult } = require('express-validator');
 const multer = require('multer');
 const path = require('path');
@@ -14,8 +15,9 @@ router.get('/', function (req, res, next) {
   const auth = req.isAuthenticated();
   const user = req.user;
   pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
-    res.render('reserved-area', { auth, title: 'Express', pizzeria, message: null, user });
-
+    pren.getALLPrenotazioni(req.params.ID_Pizzeria).then((prenotazionis) => {
+      res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user });
+    });
   });
 });
 

@@ -50,20 +50,28 @@
             <thead>
                 <tr>
                     <th>Nome Cliente</th>
+                    <th>Numero Persone</th>
                     <th>Data Prenotazione</th>
                     <th>Ora Prenotazione</th>
                     <th>Azioni</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Nicholas Ternullo</td>
-                    <td>25-05-2023</td>
-                    <td>20:00</td>
-                    <td>
-                        <button class="btn btn-success btn-sm">Completato</button>
-                    </td>
-                </tr>
+
+                <% prenotazionis.forEach((prenotazioni)=> { %>
+                    <tr>
+                        <td><%= prenotazioni.NomePrenotazione %></td>
+                        <td><%= prenotazioni.NumeroPersone %></td>
+                        <td><%= prenotazioni.OrarioPrenotazione %></td>
+                        <td><%= prenotazioni.DataPrenotazione %></td>
+                        <td>
+                            <button class="btn btn-success btn-sm">Completato</button>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <% }); %>
+
+                
                 <!-- Altre righe per le prenotazioni -->
             </tbody>
         </table>

@@ -51,11 +51,6 @@
             </p>
 
             <div class="bottoniDettagli">
-              <!-- Bottone visibile a tutti 
-              <button type="button" class="btn btn-primary btn-default" data-toggle="modal" data-target="#menuModal">
-                Mostra Menù
-              </button>
-              -->
 
               <!-- Bottone visibile solo agli utenti registrati -->
               <% if(auth) { %>
@@ -69,14 +64,6 @@
                 <a href="ordine.html">Ordina la pizza</a>
               </button>
               <% } %>
-
-
-              <!-- Bottone visibile solo agli utenti registrati
-              <button type="button" class="btn btn-primary btn-default" data-toggle="modal"
-                data-target="#recensioneModal">
-                Aggiungi una recensione
-              </button>
-              -->
             </div>
           </div>
 
@@ -210,45 +197,7 @@
                     </div>
                 </div>
 
-                <!-- Recensione a comparsa della Pizzeria -->
-                <div class="modal fade" id="recensioneModal" tabindex="-1" role="dialog"
-                  aria-labelledby="recensioneModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="recensioneModalLabel">Aggiungi una recensione</h5>
-                      </div>
-                      <div class="modal-body">
-                        <form>
-                          <div class="form-group">
-                            <label for="voto">Voto</label>
-                            <select class="form-control" id="voto" required>
-                              <option value="" disabled selected>Scegli un voto</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="Commento">Commento</label>
-                            <input type="text" class="form-control" id="commento" required>
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal"">Invia</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                
               
 
         </div>
@@ -270,7 +219,6 @@
                             <!-- Menu -->
                             <h3>Menu</h3>
                             <% pizzas.forEach((pizza)=> { %>
-                              <% if (pizza.PizzaNome !== null) { %>
                               <div class="card">
                                 <div class="card-body d-flex justify-content-between align-items-center">
 
@@ -289,7 +237,7 @@
                                 </div>
                               </div>
                               <p></p>
-                              <% }}); %>
+                              <% }); %>
                           </div>
                       </div>
                     </div>

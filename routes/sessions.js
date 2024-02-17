@@ -5,6 +5,7 @@ const router = express.Router();
 const passport = require('passport');
 const dao = require('../modules/pizzeria-dao');
 const daoUser = require('../modules/user-dao');
+const daoPren = require('../modules/prenotazioni-dao');
 
 //tramite passport, gestisce il login dell'utente e dell'admin
 router.post('/sessions', function (req, res, next) {
@@ -28,9 +29,10 @@ router.post('/sessions', function (req, res, next) {
       // se è admin
       else {
         dao.getPizzeriaById(user.id).then((pizzeria) => {
-          const auth = req.isAuthenticated();          
-          res.render('reserved-area', { auth, title: 'Express', pizzeria, message: null, user});
-
+          daoPren.getALLPrenotazioni(req.params.ID_Pizzeria).then((prenotazionis) => {
+            const auth = req.isAuthenticated();
+            res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user});
+          });
         });
       }
     });
