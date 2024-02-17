@@ -21,25 +21,6 @@ router.get('/:ID_Pizzeria', function (req, res, next) {
     });
 });
 
-router.post('/menu', async function (req, res, next) {
-    try {
-        const pizzeriaID = req.params.pizzeriaID;
-        const pizza = {
-            Nome: req.body.Nome,
-            ID_Pizzeria: pizzeriaID,
-            Ingredienti: req.body.Ingredienti,
-            Prezzo: req.body.Prezzo
-        };
-
-        // Chiama la funzione insertPizza
-        pizzeriaDao.insertPizza(pizza, pizzeriaID);
-
-    } catch (error) {
-        var auth = req.isAuthenticated;
-        res.render('menu', { auth, message: error });
-    }
-});
-
 
 
 
