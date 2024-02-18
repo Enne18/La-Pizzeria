@@ -233,3 +233,23 @@ exports.deletePizza = function (pizza, pizzeriaID) {
         });
     });
 };
+
+// ritorna una lista contenente tutte le citta' delle pizzerie
+exports.getALLCity = function () {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT DISTINCT Città FROM Pizzeria WHERE ID_Pizzeria = ?';
+        db.all(sql, [id], (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+
+            else {
+                const citta = rows.map((e) => ({
+                    elencoCitta: e.Città
+                }));
+                resolve(citta);
+            }
+        });
+    });
+};
