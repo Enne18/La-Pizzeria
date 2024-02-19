@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
   const auth = req.isAuthenticated();
   const user = req.user;
   pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
-    pren.getALLPrenotazioni(req.params.ID_Pizzeria).then((prenotazionis) => {
+    pren.getALLPrenotazioni(user.id).then((prenotazionis) => {
       res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user });
     });
   });
@@ -66,5 +66,17 @@ router.post('/:ID_Pizzeria', [
   }
 });
 
+router.post('/delete/:IDPren', function (req, res, next) {
+  const auth = req.isAuthenticated();
+  const user = req.user;
+  pren.deletePrenotazione(req.params.IDPren);
+
+  pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
+      daoPren.getALLPrenotazioni(user.id).then((prenotazionis) => {
+          const auth = req.isAuthenticated();
+          res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user });
+      });
+  });
+});
 
 module.exports = router;

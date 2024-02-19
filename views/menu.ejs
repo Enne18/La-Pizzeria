@@ -1,18 +1,17 @@
 <%- include('headerIndex') %>
 
-<script src="../javascripts/menuPizze.js"></script>
-    <div class="row justify-content-center bordato">
-        <div class="col-md-6" id="cardRestaurantBG">
-                <!-- ... Altri campi di informazioni sulla pizzeria ... -->
+  <div class="row justify-content-center bordato">
+    <div class="col-md-6" id="cardRestaurantBG">
+      <!-- ... Altri campi di informazioni sulla pizzeria ... -->
 
-                <!-- Menu -->
-                <div class="container">
-                    <div class="row">
-                      <div class="col">
-                        <h3>Menu</h3>
-                      </div>
-                      <div class="col">
-                        <button class="btn btn-primary btn-success" onclick="nuovaPizza()"><a>Aggiungi Pizza</a></button>
+      <!-- Menu -->
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h3>Menu</h3>
+          </div>
+          <div class="col">
+            <button class="btn btn-primary btn-success" data-toggle="modal" data-target="#nuovaPizza""><a>Aggiungi Pizza</a></button>
                       </div>
                     </div>
                   </div>
@@ -20,62 +19,60 @@
                 <hr>
                 <% pizzas.forEach((pizza, pizzeria)=> { %>
                     <% if (pizza.ID_Pizzeria == pizzeria.ID_Pizzeria && pizza.PizzaNome !== null) { %>
+                        <div class=" pizza-fields">
+              <div class="form-group">
+                <label>Nome:</label>
+                <input type="text" class="form-control" value="<%= pizza.PizzaNome %>" name="Nome">
+              </div>
+              <div class="form-group">
+                <label>Ingredienti:</label>
+                <input type="text" class="form-control" value="<%= pizza.Ingredienti %>" name="Ingredienti">
+              </div>
+              <div class="form-group">
+                <label>Prezzo:</label>
+                <input type="number" class="form-control" value="<%= pizza.Prezzo %>" name="Prezzo">
+              </div>
+              <form method="POST" action="/menu/delete/<%=pizza.ID_Pizza%>">
+                <button class="btn btn-danger rimuoviButton" type="submit">Rimuovi</button>
+              </form>
+          </div>
 
-                        <div class="pizza-fields">
-                            <div class="form-group">
-                                <label>Nome:</label>
-                                <input type="text" class="form-control" value="<%= pizza.PizzaNome %>" name="Nome">
-                            </div>
-                            <div class="form-group">
-                                <label>Ingredienti:</label>
-                                <input type="text" class="form-control" value="<%= pizza.Ingredienti %>"
-                                    name="Ingredienti">
-                            </div>
-                            <div class="form-group">
-                                <label>Prezzo:</label>
-                                <input type="number" class="form-control" value="<%= pizza.Prezzo %>" name="Prezzo">
-                            </div>
-                            <button class="btn btn-danger rimuoviButton" type="button">Rimuovi</button>
-                        </div>
-
-                        <% }}); %>
+          <% }}); %>
 
 
             <br>
         </div>
-    </div>
+      </div>
 
-    <div id="nuovaPizza" class="modal fade" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Aggiungi Pizza</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form class="nuova-pizza-form">
-              <div class="form-group">
-                <label for="nomeInput">Nome:</label>
-                <input type="text" class="form-control" id="nomeInput" name="Nome" required>
-              </div>
-              <div class="form-group">
-                <label for="ingredientiInput">Ingredienti:</label>
-                <input type="text" class="form-control" id="ingredientiInput" name="Ingredienti" required>
-              </div>
-              <div class="form-group">
-                <label for="prezzoInput">Prezzo:</label>
-                <input type="number" class="form-control" id="prezzoInput" name="Prezzo" required>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-            <button type="button" class="btn btn-primary" id="confermaButton">Conferma</button>
+      <div id="nuovaPizza" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Aggiungi Pizza</h5>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="/menu/add/<%= pizzeria.ID_Pizzeria %>">
+                <div class="form-group">
+                  <label for="nomeInput">Nome:</label>
+                  <input type="text" class="form-control" id="Nome" name="Nome" required>
+                </div>
+                <div class="form-group">
+                  <label for="ingredientiInput">Ingredienti:</label>
+                  <input type="text" class="form-control" id="Ingredienti" name="Ingredienti" required>
+                </div>
+                <div class="form-group">
+                  <label for="prezzoInput">Prezzo:</label>
+                  <input type="number" class="form-control" id="Prezzo" name="Prezzo" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+
+              <button class="btn btn-success" type="submit">Aggiungi</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <%- include('footer') %>
+      <%- include('footer') %>

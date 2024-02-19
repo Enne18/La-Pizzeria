@@ -29,7 +29,7 @@ router.post('/sessions', function (req, res, next) {
       // se è admin
       else {
         dao.getPizzeriaById(user.id).then((pizzeria) => {
-          daoPren.getALLPrenotazioni(req.params.ID_Pizzeria).then((prenotazionis) => {
+          daoPren.getALLPrenotazioni(user.id).then((prenotazionis) => {
             const auth = req.isAuthenticated();
             res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user});
           });

@@ -15,60 +15,48 @@
 
             <button id="filter-button">Filter</button>
           </div>
-          <div class="form-group mr-3">
-            <select class="form-control" name="tipo">
-              <option value="">Tutti i tipi</option>
-              <option value="ConsumazioneSulPosto">Consumazione sul posto</option>
-              <option value="RitiroEsterno">Ritiro all'esterno</option>
-              <option value="ConsegnaADomicilio">Consegna a domicilio</option>
-            </select>
-          </div>
 
-          <div class="search-wrapper">
-            <input type="search" id="search" placeholder="Cerca...">
-          </div>
         </form>
+  
+          <form method="POST" action="/restaurants/search" class="d-flex">
+            <input class="form-control form-control-aside me-2" type="search" placeholder="Cerca..." name="search">
+            <button class="btn btn-outline-light" type="submit">Cerca</button>
+          </form>
       </div>
     </div>
   </div>
 
 
-  <% pizzerias.forEach((pizzeria)=> { %>
-    <hr>
-
-    <!-- Elenco Pizzerie -->
-    <div id="app-container" class="bordato">
-      <div class="row">
-        <div class="col-md-1 offset-md-1"></div>
-        <div class="col-md-6" id="cardRestaurantBG">
-          <a class="legenda" href="/detail/<%= pizzeria.ID_Pizzeria %>">
-            <h2>
-              <%= pizzeria.Nome %>
-            </h2>
-            <p>
-              <%= pizzeria.Tipologia %>
-            </p>
-            <p>
-              <%= pizzeria.Città %> - <%= pizzeria.Indirizzo %>
-            </p>
-            <p>Numero di telefono: <%= pizzeria.Telefono %>
-            </p>
-          </a>
-        </div>
-        <div class="col-md-3 d-flex justify-content-end">
-          <div class="image-container">
-            <img src="/images/Pizzeria-Acquapazza-mini.png" alt="Pizzeria-Acquapazza-mini.png" class="img-fluid">
+    <% pizzerias.forEach((pizzeria)=> { %>
+      <hr>
+      <!-- Elenco Pizzerie -->
+      <div id="app-container" class="bordato">
+        <div class="row">
+          <div class="col-md-1 offset-md-1"></div>
+          <div class="col-md-6" id="cardRestaurantBG">
+            <a class="legenda" href="/detail/<%= pizzeria.ID_Pizzeria %>">
+              <h2>
+                <%= pizzeria.Nome %>
+              </h2>
+              <p>
+                <%= pizzeria.Tipologia %>
+              </p>
+              <p>
+                <%= pizzeria.Città %> - <%= pizzeria.Indirizzo %>
+              </p>
+              <p>Numero di telefono: <%= pizzeria.Telefono %>
+              </p>
+            </a>
+          </div>
+          <div class="col-md-3 d-flex justify-content-end">
+            <div class="image-container">
+              <img src="/images/Pizzeria-Acquapazza-mini.png" alt="Pizzeria-Acquapazza-mini.png" class="img-fluid">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <hr>
+      <hr>
     <% }); %>
-
-
-
-
-
 
       </div>
       <%-include('footer')-%>

@@ -34,94 +34,62 @@
                 <label for="inputImmagini">Immagini</label>
                 <input type="file" class="form-control-file" id="inputImmagini">
             </div>
-            <button class="btn btn-primary btn-success" type="submit"><a>Salva modifiche</a></button>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary btn-success" type="submit"><a>Salva modifiche</a></button>
+                </div>
+
         </form>
-
-        <button class="btn btn-primary btn-danger"><a href="/menu/<%= pizzeria.ID_Pizzeria %>">Modifica il Menu qua</a></button>
-
-        <hr>
-
-        <h2>Prenotazioni</h2>
-        <div class="form-group">
-            <label for="inputData">Filtro per data</label>
-            <input type="date" class="form-control" id="inputData">
+        <div class="col">
+            <button class="btn btn-primary btn-danger"><a href="/menu/<%= pizzeria.ID_Pizzeria %>">Modifica il Menu
+                    qua</a></button>
         </div>
-        <table class="table table-bordered">
-            <thead>
+    </div>
+
+    <hr>
+
+    <h2>Prenotazioni</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nome Cliente</th>
+                <th>Numero Persone</th>
+                <th>Data Prenotazione</th>
+                <th>Ora Prenotazione</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% prenotazionis.forEach((prenotazioni)=> { %>
                 <tr>
-                    <th>Nome Cliente</th>
-                    <th>Numero Persone</th>
-                    <th>Data Prenotazione</th>
-                    <th>Ora Prenotazione</th>
-                    <th>Azioni</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <% prenotazionis.forEach((prenotazioni)=> { %>
-                    <tr>
-                        <td><%= prenotazioni.NomePrenotazione %></td>
-                        <td><%= prenotazioni.NumeroPersone %></td>
-                        <td><%= prenotazioni.OrarioPrenotazione %></td>
-                        <td><%= prenotazioni.DataPrenotazione %></td>
-                        <td>
-                            <button class="btn btn-success btn-sm">Completato</button>
-                        </td>
-                    </tr>
-                    <p></p>
-                    <% }); %>
-
-                
-                <!-- Altre righe per le prenotazioni -->
-            </tbody>
-        </table>
-
-        <hr>
-
-        <h2>Ordinazioni</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nome Cliente</th>
-                    <th>Indirizzo di consegna</th>
-                    <th>Ordine</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Nicholas Ternullo</td>
-                    <td>Via del Duomo 6 Vercelli</td>
-                    <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#ordineModal">Visuaizza
-                            ordine</button></td>
                     <td>
-                        <button class="btn btn-success btn-sm">Convalida</button>
-                        <button class="btn btn-danger btn-sm">Annulla</button>
+                        <%= prenotazioni.Nome %>
+                    </td>
+                    <td>
+                        <%= prenotazioni.NPersone %>
+                    </td>
+                    <td>
+                        <%= prenotazioni.Orario %>
+                    </td>
+                    <td>
+                        <%= prenotazioni.Data %>
+                    </td>
+                    <td>
+                        <form method="POST" action="/reserved-area/delete/<%=prenotazioni.IDPrenotazione%>">
+                            <button class="btn btn-danger" type="submit">Rimuovi</button>
+                        </form>
                     </td>
                 </tr>
-                <!-- Altre righe per le prenotazioni -->
-            </tbody>
-        </table>
+                <p></p>
+                <% }); %>
 
-        <!-- Modal visualizzazione Ordine -->
-        <div class="modal fade" id="ordineModal" tabindex="-1" role="dialog" aria-labelledby="ordineModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h4 class="modal-title">Pizze</h4>
-                        <ul>
-                            <li>Pizza Margherita<span class="price"> x1</span></li>
-                            <li>Pizza Prosciutto e Funghi<span class="price"> x2</span></li>
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <!-- Altre righe per le prenotazioni -->
+        </tbody>
+    </table>
 
-        <hr>
+    <hr>
 
     </div>
     <%-include('footer')-%>

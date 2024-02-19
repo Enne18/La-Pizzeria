@@ -77,8 +77,8 @@ exports.getAllPizzerias = function () {
 //ritorna una lista contenente le pizzerie che rispettano i parametri di ricerca
 exports.getSearchedPizzerias = function (search) {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM Pizzeria where Nome like ?';
-        const params = Array(8).fill(search);
+        const sql = 'SELECT * FROM Pizzeria WHERE Nome like ? OR Tipologia like ? OR Orari like ? OR Indirizzo like ?';
+        const params = Array(4).fill(search);
         db.all(sql, params, (err, rows) => {
             if (err) {
                 reject(err);
@@ -163,7 +163,7 @@ exports.getPizzeriaByIdPizzeria = function (id) {
 // ritorna una lista contenente tutte le pizze della pizzeria specificata
 exports.getALLPizza = function (id) {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT Pizza.Nome, Ingredienti, Prezzo FROM Pizza JOIN Pizzeria ON Pizza.ID_Pizzeria = Pizzeria.ID_pizzeria WHERE Pizza.ID_Pizzeria = ?';
+        const sql = 'SELECT Pizza.Nome, Ingredienti, Prezzo, ID_Pizza FROM Pizza JOIN Pizzeria ON Pizza.ID_Pizzeria = Pizzeria.ID_pizzeria WHERE Pizza.ID_Pizzeria = ?';
         db.all(sql, [id], (err, rows) => {
             if (err) {
                 reject(err);
@@ -174,7 +174,8 @@ exports.getALLPizza = function (id) {
                 const pizzaInfo = rows.map((e) => ({
                     PizzaNome: e.Nome,
                     Ingredienti: e.Ingredienti,
-                    Prezzo: e.Prezzo
+                    Prezzo: e.Prezzo,
+                    ID_Pizza: e.ID_Pizza
                 }));
                 resolve(pizzaInfo);
             }
@@ -182,14 +183,14 @@ exports.getALLPizza = function (id) {
     });
 };
 
-exports.insertPizza = function (pizza, pizzeriaID) {
+exports.insertPizza = function (pizzeriaID, pizza) {
     return new Promise((resolve, reject) => {
         const sql = 'INSERT INTO Pizza(Nome, ID_Pizzeria, Ingredienti, Prezzo) VALUES (?,?,?,?)';
         db.run(sql, [
-            pizza.Nome || null,
+            pizza.Nome,
             pizzeriaID,
-            pizza.Ingredienti || null,
-            pizza.Prezzo || null
+            pizza.Ingredienti,
+            pizza.Prezzo
         ], function (err) {
             if (err) {
                 reject(err);
@@ -204,9 +205,9 @@ exports.updatePizza = function (pizza) {
     return new Promise((resolve, reject) => {
         const sql = 'UPDATE Pizza SET Nome = ?, Ingredienti = ?, Prezzo = ? WHERE ID_Pizza = ?';
         db.run(sql, [
-            pizza.Nome || null,
-            pizza.Ingredienti || null,
-            pizza.Prezzo || null,
+            pizza.Nome,
+            pizza.Ingredienti,
+            pizza.Prezzo,
             pizza.ID_Pizza
         ], function (err) {
             if (err) {
@@ -218,12 +219,11 @@ exports.updatePizza = function (pizza) {
     });
 };
 
-exports.deletePizza = function (pizza, pizzeriaID) {
+exports.deletePizza = function (pizza) {
     return new Promise((resolve, reject) => {
-        const sql = 'DELETE FROM Pizza WHERE Pizza.ID_Pizzeria = ? AND Pizza.Nome = ?';
+        const sql = 'DELETE FROM Pizza WHERE Pizza.ID_Pizza = ?';
         db.run(sql, [
-            pizzeriaID,
-            pizza.Nome
+            pizza
         ], function (err) {
             if (err) {
                 reject(err);

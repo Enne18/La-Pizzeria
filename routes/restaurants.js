@@ -14,6 +14,14 @@ router.get('/', function(req, res, next) {
   
 });
 
+router.post('/search', async function(req, res, next){
+  const search = '%' + req.body.search + '%';
+  dao.getSearchedPizzerias(search).then((pizzerias) => {
+    const auth = req.isAuthenticated();
+    const user = req.user;
+    res.render('restaurants', { auth, title: 'Express', message: null , pizzerias, user});
+  });
+});
 
 
 module.exports = router;
