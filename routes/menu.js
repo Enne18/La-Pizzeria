@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var pizzeriaDao = require('../modules/pizzeria-dao');
-const user = require('../modules/user-dao');
+const userDao = require('../modules/user-dao');
 const { check, validationResult } = require('express-validator');
 const daoPren = require('../modules/prenotazioni-dao');
 
@@ -11,9 +11,10 @@ const daoPren = require('../modules/prenotazioni-dao');
 router.get('/:ID_Pizzeria', function (req, res, next) {
     const auth = req.isAuthenticated();
     const user = req.user;
+    const prop = userDao.getUserIsProp(req.user);
     pizzeriaDao.getPizzeriaByIdPizzeria(req.params.ID_Pizzeria).then((pizzeria) => {
         pizzeriaDao.getALLPizza(req.params.ID_Pizzeria).then((pizzas) => {
-            res.render('menu', { auth, title: 'Scheda' + ' ' + pizzeria.Nome, message: null, pizzeria, pizzas, user });
+            res.render('menu', { auth, title: 'Scheda' + ' ' + pizzeria.Nome, message: null, pizzeria, pizzas, user, prop});
         });
     });
 });
@@ -26,7 +27,8 @@ router.post('/delete/:ID_Pizza', function (req, res, next) {
     pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
         daoPren.getALLPrenotazioni(user.id).then((prenotazionis) => {
             const auth = req.isAuthenticated();
-            res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user });
+            const prop = userDao.getUserIsProp(req.user);
+            res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user, prop});
         });
     });
 });
@@ -41,8 +43,9 @@ router.post('/add/:ID_Pizzeria', [
         const messages = errors.array().map(error => error.msg);
         const auth = req.isAuthenticated();
         const user = req.user;
+        const prop = userDao.getUserIsProp(req.user);
         pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
-            res.render('reserved-area', { auth, title: 'Express', pizzeria, message: messages[0], user });
+            res.render('reserved-area', { auth, title: 'Express', pizzeria, message: messages[0], user, prop});
         });
     } else {
         try {
@@ -59,7 +62,8 @@ router.post('/add/:ID_Pizzeria', [
             pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
                 daoPren.getALLPrenotazioni(user.id).then((prenotazionis) => {
                     const auth = req.isAuthenticated();
-                    res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user });
+                    const prop = userDao.getUserIsProp(req.user);
+                    res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user, prop});
                 });
             });
 
@@ -68,7 +72,8 @@ router.post('/add/:ID_Pizzeria', [
             pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
                 daoPren.getALLPrenotazioni(user.id).then((prenotazionis) => {
                     const auth = req.isAuthenticated();
-                    res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user });
+                    const prop = userDao.getUserIsProp(req.user);
+                    res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user, prop});
                 });
             });
         }

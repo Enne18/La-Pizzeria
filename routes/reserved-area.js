@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var pizzeriaDao = require('../modules/pizzeria-dao');
-const user = require('../modules/user-dao');
+const userDao = require('../modules/user-dao');
 const pren = require('../modules/prenotazioni-dao');
 const { check, validationResult } = require('express-validator');
 const multer = require('multer');
@@ -14,9 +14,10 @@ const fs = require('fs');
 router.get('/', function (req, res, next) {
   const auth = req.isAuthenticated();
   const user = req.user;
+  const prop = userDao.getUserIsProp(req.user);
   pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
     pren.getALLPrenotazioni(user.id).then((prenotazionis) => {
-      res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user });
+      res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user, prop});
     });
   });
 });
@@ -35,7 +36,15 @@ router.post('/:ID_Pizzeria', [
   if (!errors.isEmpty()) {
     // Campi non validi, restituisce un messaggio di errore
     const messages = errors.array().map(error => error.msg);
-    res.render('register-pizzeria', { auth: false, title: 'Registra pizzeria', message: messages[0] });
+    const auth = req.isAuthenticated();
+    const user = req.user;
+    pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
+      pren.getALLPrenotazioni(user.id).then((prenotazionis) => {
+        const auth = req.isAuthenticated();
+        const prop = userDao.getUserIsProp(req.user);
+        res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: messages[0], user, prop});
+      });
+    });
   } else {
     try {
       // Campi validi, esegui l'aggiornamento della pizzeria esistente
@@ -49,7 +58,7 @@ router.post('/:ID_Pizzeria', [
         Nome: req.body.nome,
         Indirizzo: req.body.indirizzo,
         Città: req.body.citta,
-        Telefono: parseInt(req.body.numero),
+        Telefono: req.body.numero,
         Orari: req.body.GGhhApertura,
         Tipologia: req.body.categoria,
         GoogleMapsLink: req.body.googleMapsLink,
@@ -61,7 +70,15 @@ router.post('/:ID_Pizzeria', [
       });
 
     } catch (error) {
-      res.render('register-pizzeria', { auth: false, title: 'Registra pizzeria', message: 'Errore nell\'aggiornamento della Pizzeria' });
+      const auth = req.isAuthenticated();
+      const user = req.user;
+      const prop = userDao.getUserIsProp(req.user);
+      pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
+        pren.getALLPrenotazioni(user.id).then((prenotazionis) => {
+          const auth = req.isAuthenticated();
+          res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: 'Errore nell\'aggiornamento della Pizzeria', user, prop});
+        });
+      });
     }
   }
 });
@@ -72,10 +89,11 @@ router.post('/delete/:IDPren', function (req, res, next) {
   pren.deletePrenotazione(req.params.IDPren);
 
   pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
-      daoPren.getALLPrenotazioni(user.id).then((prenotazionis) => {
-          const auth = req.isAuthenticated();
-          res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user });
-      });
+    pren.getALLPrenotazioni(user.id).then((prenotazionis) => {
+      const auth = req.isAuthenticated();
+      const prop = user.getUserIsProp(req.user);
+      res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user, prop});
+    });
   });
 });
 

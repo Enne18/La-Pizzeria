@@ -23,6 +23,25 @@ exports.getUserById = function (id) {
     });
 };
 
+//ritorna se un utente è proprietario
+exports.getUserIsProp = function (id) {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT Proprietario FROM Utente WHERE ID_User = ?';
+        db.get(sql, [id], (err, row) => {
+            if (err)
+                reject(err);
+            else if (row === undefined)
+                resolve({ error: 'User not found.' });
+            else {
+                const user = {
+                    prop: row.Proprietario,
+                }
+                resolve(user);
+            }
+        });
+    });
+};
+
 //ritorna un utente date email e password
 exports.getUser = function (email, password) {
     return new Promise((resolve, reject) => {

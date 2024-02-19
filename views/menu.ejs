@@ -11,15 +11,18 @@
             <h3>Menu</h3>
           </div>
           <div class="col">
-            <button class="btn btn-primary btn-success" data-toggle="modal" data-target="#nuovaPizza""><a>Aggiungi Pizza</a></button>
-                      </div>
-                    </div>
-                  </div>
+            <button class="btn btn-primary btn-success" data-toggle="modal" data-target="#nuovaPizza"><a>Aggiungi Pizza</a></button>
+          </div>
+          <div class="col">
+            <button class="btn btn-primary"><a href="/reserved-area">Torna indietro</a></button>
+          </div>
+        </div>
+      </div>
 
-                <hr>
-                <% pizzas.forEach((pizza, pizzeria)=> { %>
-                    <% if (pizza.ID_Pizzeria == pizzeria.ID_Pizzeria && pizza.PizzaNome !== null) { %>
-                        <div class=" pizza-fields">
+      <hr>
+      <% pizzas.forEach((pizza, pizzeria)=> { %>
+          <% if (pizza.ID_Pizzeria == pizzeria.ID_Pizzeria && pizza.PizzaNome !== null) { %>
+              <div class=" pizza-fields">
               <div class="form-group">
                 <label>Nome:</label>
                 <input type="text" class="form-control" value="<%= pizza.PizzaNome %>" name="Nome">

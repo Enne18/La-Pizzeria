@@ -2,16 +2,14 @@
 
 let express = require('express');
 const pizzeriaDao = require('../modules/pizzeria-dao');
-const user = require('../modules/user-dao');
+const userDao = require('../modules/user-dao');
 const { check, validationResult } = require('express-validator');
 let router = express.Router();
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 
 //get della pagina per l'inserimento dei dati di una pizzeria da parte dell'admin
 router.get('/', function (req, res, next) {
-  res.render('register-pizzeria', { auth: false, title: 'Registra pizzeria', message: null });
+  const prop = userDao.getUserIsProp(req.user);
+  res.render('register-pizzeria', { auth: false, title: 'Registra pizzeria', message: null, prop });
 });
 
 // Controllo dei valori inseriti nel form
@@ -29,7 +27,8 @@ router.post('/', [
   if (!errors.isEmpty()) {
     // Campi non validi, restituisce un messaggio di errore
     const messages = errors.array().map(error => error.msg);
-    res.render('register-pizzeria', { auth: false, title: 'Registra pizzeria', message: messages[0] });
+    const prop = userDao.getUserIsProp(req.user);
+    res.render('register-pizzeria', { auth: false, title: 'Registra pizzeria', message: messages[0], prop });
   } else {
     try {
       // campi validi, crea la pizzeria
@@ -43,12 +42,12 @@ router.post('/', [
         NomeUtente: req.body.nome
       }
 
-      user.insertAdmin(admin).then((id) => {  
+      user.insertAdmin(admin).then((id) => {
         const pizzeria = {
           Nome: req.body.nome,
           Indirizzo: req.body.indirizzo,
           Città: req.body.citta,
-          Telefono: parseInt(req.body.numero),
+          Telefono: req.body.numero,
           Orari: req.body.GGhhApertura,
           Tipologia: req.body.categoria,
           GoogleMapsLink: null,
@@ -57,17 +56,16 @@ router.post('/', [
 
         console.log(pizzeria);
         pizzeriaDao.insertPizzeria(pizzeria);
-        //pizzeriaDao.insertPizza(id);
       });
 
-      const auth = req.isAuthenticated();
-      pizzeriaDao.getPizzeriaById(id).then((pizzeria) => {
-        res.render('reserved-area', { auth, title: 'Express', pizzeria, message: null, user });
-      });
-    
+
+      const prop = userDao.getUserIsProp(req.user);
+      res.render('index', { title: 'La Pizzeria', auth, message: 'Pizzeria creata con successo, fare il login con i dati inseriti per accedere all\'area riservata', prop });
+
 
     } catch (error) {
-      res.render('register-pizzeria', { auth:false , title: 'Registra pizzeria', message: 'Errore nella registrazione della Pizzeria' });
+      const prop = userDao.getUserIsProp(req.user);
+      res.render('register-pizzeria', { auth: false, title: 'Registra pizzeria', message: 'Errore nella registrazione della Pizzeria', prop });
     }
   }
 

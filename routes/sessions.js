@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const dao = require('../modules/pizzeria-dao');
-const daoUser = require('../modules/user-dao');
+const userDao = require('../modules/user-dao');
 const daoPren = require('../modules/prenotazioni-dao');
 
 //tramite passport, gestisce il login dell'utente e dell'admin
@@ -20,10 +20,11 @@ router.post('/sessions', function (req, res, next) {
       if (err) { return next(err); }
       // se è utente
       if (user.proprietario == 1) {
-        daoUser.getUserById(user.id).then((user) => 
+        userDao.getUserById(user.id).then((user) => 
             {
               const auth = req.isAuthenticated();
-              res.render('index', { auth, message: null, user });
+              const prop = userDao.getUserIsProp(req.user);
+              res.render('index', { auth, message: null, user, prop});
             });
       }
       // se è admin
@@ -31,7 +32,8 @@ router.post('/sessions', function (req, res, next) {
         dao.getPizzeriaById(user.id).then((pizzeria) => {
           daoPren.getALLPrenotazioni(user.id).then((prenotazionis) => {
             const auth = req.isAuthenticated();
-            res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user});
+            const prop = userDao.getUserIsProp(req.user);
+            res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user, prop});
           });
         });
       }
