@@ -21,7 +21,7 @@
 
       <hr>
       <% pizzas.forEach((pizza, pizzeria)=> { %>
-          <% if (pizza.ID_Pizzeria == pizzeria.ID_Pizzeria && pizza.PizzaNome !== null) { %>
+          <% if (pizza.ID_Pizzeria == pizzeria.ID_Pizzeria) { %>
               <div class=" pizza-fields">
               <div class="form-group">
                 <label>Nome:</label>

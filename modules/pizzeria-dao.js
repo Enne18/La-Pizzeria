@@ -100,6 +100,31 @@ exports.getSearchedPizzerias = function (search) {
     });
 };
 
+//ritorna una lista contenente le pizzerie che rispettano i parametri di filtro città
+exports.getFilteredPizzeria = function (filter) {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM Pizzeria WHERE Città like ?';
+        db.all(sql, filter, (err, rows) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const pizzerias = rows.map((e) => (
+                {
+                    ID_Pizzeria: e.ID_Pizzeria,
+                    Nome: e.Nome,
+                    Indirizzo: e.Indirizzo,
+                    Orari: e.Orari,
+                    Tipologia: e.Tipologia,
+                    GoogleMapsLink: e.GoogleMapsLink,
+                    Telefono: e.Telefono,
+                    Città: e.Città
+                }));
+            resolve(pizzerias);
+        });
+    });
+};
+
 //ritorna la pizzeria identificata dall'id utente passato come parametro
 exports.getPizzeriaById = function (id) {
     return new Promise((resolve, reject) => {
@@ -237,19 +262,17 @@ exports.deletePizza = function (pizza) {
 // ritorna una lista contenente tutte le citta' delle pizzerie
 exports.getALLCity = function () {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT DISTINCT Città FROM Pizzeria WHERE ID_Pizzeria = ?';
-        db.all(sql, [id], (err, rows) => {
+        const sql = 'SELECT DISTINCT Città FROM Pizzeria';
+        db.all(sql, (err, rows) => {
             if (err) {
                 reject(err);
                 return;
             }
-
-            else {
-                const citta = rows.map((e) => ({
-                    elencoCitta: e.Città
-                }));
-                resolve(citta);
-            }
+            const citta = rows.map((e) => ({
+                elencoCitta: e.Città
+            }));
+            const cittaOrdinate = citta.sort((a, b) => a.elencoCitta.localeCompare(b.elencoCitta));
+            resolve(cittaOrdinate);
         });
     });
 };

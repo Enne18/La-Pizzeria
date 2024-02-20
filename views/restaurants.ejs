@@ -3,25 +3,25 @@
   <hr>
 
   <!-- Form di ricerca e Filtro -->
-  <div class="main-content">
+  <div class="main-content container">
     <div class="row">
       <div class="col-md-1 offset-md-1"></div>
-      <div class="col-md-6">
-        <form class="form-inline d-flex justify-content-start mt-3">
-          <div class="form-group mr-3">
-            <select id="city-filter">
-              <option value="">Select city</option>
-            </select>
-
-            <button id="filter-button">Filter</button>
-          </div>
-
+      <div class="col">
+        <form method="post" action="/restaurants/filter" class="d-flex">
+          <select class="form-control form-control-aside me-2" placeholder="Filtra città..." name="filter">
+            <option value="">Tutte le città</option>
+            <% cittaOrdinate.forEach((pizzeria)=> { %>
+              <option value="<%= pizzeria.elencoCitta %>"><%= pizzeria.elencoCitta %></option>
+              <% }); %>
+          </select>
+          <button class="btn btn-danger" type="submit">Filtra</button>
         </form>
-  
-          <form method="POST" action="/restaurants/search" class="d-flex">
-            <input class="form-control form-control-aside me-2" type="search" placeholder="Cerca..." name="search">
-            <button class="btn btn-outline-light" type="submit">Cerca</button>
-          </form>
+      </div>
+      <div class="col">
+        <form method="post" action="/restaurants/search" class="d-flex">
+          <input class="form-control form-control-aside me-2" type="search" placeholder="Cerca..." name="search">
+          <button class="btn btn-success" type="submit">Cerca</button>
+        </form>
       </div>
     </div>
   </div>

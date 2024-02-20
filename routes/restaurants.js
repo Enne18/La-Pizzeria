@@ -8,21 +8,36 @@ const userDao = require('../modules/user-dao');
 /* GET restaurants page. */
 router.get('/', function(req, res, next) {
   dao.getAllPizzerias().then((pizzerias) => {
-    const auth = req.isAuthenticated();
-    const user = req.user;
-    const prop = userDao.getUserIsProp(req.user);
-    res.render('restaurants', { auth, title: 'Express', message: null , pizzerias, user, prop});
+    dao.getALLCity().then((cittaOrdinate) => {
+      const auth = req.isAuthenticated();
+      const user = req.user;
+      const prop = userDao.getUserIsProp(req.user);
+      res.render('restaurants', { auth, title: 'Express', message: null , pizzerias, cittaOrdinate, user, prop});
+    });
   });
-  
 });
 
 router.post('/search', async function(req, res, next){
   const search = '%' + req.body.search + '%';
   dao.getSearchedPizzerias(search).then((pizzerias) => {
-    const auth = req.isAuthenticated();
-    const user = req.user;
-    const prop = userDao.getUserIsProp(req.user);
-    res.render('restaurants', { auth, title: 'Express', message: null , pizzerias, user, prop});
+    dao.getALLCity().then((cittaOrdinate) => {
+      const auth = req.isAuthenticated();
+      const user = req.user;
+      const prop = userDao.getUserIsProp(req.user);
+      res.render('restaurants', { auth, title: 'Express', message: null , pizzerias, cittaOrdinate, user, prop});
+    });
+  });
+});
+
+router.post('/filter', async function(req, res, next){
+  const filter = '%' + req.body.filter + '%';
+  dao.getFilteredPizzeria(filter).then((pizzerias) => {
+    dao.getALLCity().then((cittaOrdinate) => {
+      const auth = req.isAuthenticated();
+      const user = req.user;
+      const prop = userDao.getUserIsProp(req.user);
+      res.render('restaurants', { auth, title: 'Express', message: null , pizzerias, cittaOrdinate, user, prop});
+    });
   });
 });
 

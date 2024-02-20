@@ -54,54 +54,13 @@
 
               <!-- Bottone visibile solo agli utenti registrati -->
               <% if(auth) { %>
-              <button type="button" class="btn btn-primary btn-default" data-toggle="modal"
-                data-target="#prenotazioneModal">
-                Prenota un tavolo
-              </button>
-
-              <!-- Bottone visibile solo agli utenti registrati -->
-              <button class="btn btn-primary btn-default">
-                <a href="ordine.html">Ordina la pizza</a>
-              </button>
-              <% } %>
+                <button type="button" class="btn btn-primary btn-default" data-toggle="modal"
+                  data-target="#prenotazioneModal">
+                  Prenota un tavolo
+                </button>
+                <% } %>
             </div>
           </div>
-
-          <!-- Menù a comparsa della pizzeria 
-          <div class="modal fade" id="menuModal" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="menuModalLabel">Menù Pizzeria</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <h4 class="modal-title">Pizze</h4>
-                  <ul>
-                    <li>Pizza Margherita<span class="price">€8.50</span></li>
-                    <li>Pizza Prosciutto e Funghi<span class="price">€9.50</span></li>
-                    <li>Pizza Quattro Formaggi<span class="price">€10.50</span></li>
-                    <li>Pizza Diavola<span class="price">€9.00</span></li>
-                    <li>Pizza Vegetariana<span class="price">€9.50</span></li>
-                  </ul>
-                  <hr>
-                  <h4 class="modal-title">Bibite</h4>
-                  <ul>
-                    <li>Acqua 1 L<span class="price">€1.50</span></li>
-                    <li>Coca Cola<span class="price">€2.50</span></li>
-                    <li>Birra alla spina Bionda<span class="price">€5.00</span></li>
-                  </ul>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          -->
 
           <!-- Prenotazione a comparsa della Pizzeria -->
           <div class="modal fade" id="prenotazioneModal" tabindex="-1" role="dialog"
@@ -112,14 +71,18 @@
                   <h5 class="modal-title" id="prenotazioneModalLabel">Prenotazione Tavolo</h5>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form method="POST" action="/detail/prenota/<%= pizzeria.ID_Pizzeria %>">
+                    <div class="form-group">
+                      <label for="nome">Nome prenotazione</label>
+                      <input type="text" class="form-control" id="Nome" required>
+                    </div>
                     <div class="form-group">
                       <label for="data">Data</label>
-                      <input type="date" class="form-control" id="data" required>
+                      <input type="date" class="form-control" id="Data" required>
                     </div>
                     <div class="form-group">
                       <label for="orario">Orario</label>
-                      <select class="form-control" id="orario" required>
+                      <select class="form-control" id="Orario" required>
                         <option value="" disabled selected>Scegli un orario</option>
                         <option value="12:00">12:00</option>
                         <option value="12:30">12:30</option>
@@ -138,109 +101,58 @@
                     </div>
                     <div class="form-group">
                       <label for="persone">Numero di Persone</label>
-                      <input type="number" class="form-control" id="persone" min="1" required>
+                      <input type="number" class="form-control" id="Persone" min="1" required>
                     </div>
-                  </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal"">Prenota</button>
-                    </div>
-                  </div>
+                  <button class="btn btn-primary" type="submit">Prenota</button>
+                  </form>
                 </div>
               </div>
-              
-              <!-- Ordinazione a comparsa della Pizza a domicilio -->
-              <div class="modal fade" id="ordinazioneModal" tabindex="-1" role="dialog"
-                    aria-labelledby="ordinazioneModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="prenotazioneModalLabel">Ordine Pizza</h5>
-                        </div>
-                        <div class="modal-body">
-                          <form>
-                            <div class="form-group">
-                              <label for="nome">Nome e Cognome</label>
-                              <input type="text" class="form-control" id="nome" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="indirizzo">Indirizzo di consegna</label>
-                              <input type="text" class="form-control" id="indirizzo" required>
-                            </div>
-                            <div id="pizza-container">
-                              <div class="form-group">
-                                <select class="form-control pizza" id="pizza-0" required>
-                                  <option value="" disabled selected>Scegli una pizza</option>
-                                  <option value="Margherita">Margherita<span class="price"> €8.50</span></option>
-                                  <option value="Prosciutto e Funghi">Prosciutto e Funghi<span class="price">
-                                      €9.50</span></option>
-                                  <option value="Quattro Formaggi">Quattro Formaggi<span class="price"> €10.50</span>
-                                  </option>
-                                  <option value="Diavola">Diavola<span class="price"> €9.00</span></option>
-                                  <option value="Vegetariana">Vegetariana<span class="price"> €9.50</span></option>
-                                  <option value="Acqua 1 L">Acqua 1 L<span class="price"> €1.50</span></option>
-                                  <option value="Coca Cola">Coca Cola<span class="price"> €2.50</span></option>
-                                </select>
-                                <input type="number" class="form-control quantita" min="1" required>
-                              </div>
-                            </div>
-                            <button type="button" class="btn btn-primary" id="aggiungi-pizza">Aggiungi</button>
-                            <button type="button" class="btn btn-danger" id="rimuovi-pizza">Rimuovi</button>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                          <button type="button" class="btn btn-primary" data-dismiss="modal">Conferma Ordine</button>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                
-              
-
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
 
       <div class=" row mt-3">
-                          <div class="col-md-5">
-                            <!-- Mappa -->
-                            <% if(pizzeria.GoogleMapsLink  != null){%>
-                              <h3>Ci trovi qui</h3>
-                            <%- pizzeria.GoogleMapsLink %>
-                            <% } %>
-                          </div>
-                          <div class="col-md-1">
-                            <p></p>
-                          </div>
-                          <div class="col-md-5">
-                            <!-- Menu -->
-                            <h3>Menu</h3>
-                            <% pizzas.forEach((pizza)=> { %>
-                              <div class="card">
-                                <div class="card-body d-flex justify-content-between align-items-center">
+        <div class="col-md-5">
+          <!-- Mappa -->
+          <% if(pizzeria.GoogleMapsLink !=null){%>
+            <h3>Ci trovi qui</h3>
+            <%- pizzeria.GoogleMapsLink %>
+              <% } %>
+        </div>
+        <div class="col-md-1">
+          <p></p>
+        </div>
+        <div class="col-md-5">
+          <!-- Menu -->
+          <h3>Menu</h3>
+          <% pizzas.forEach((pizza)=> { %>
+            <div class="card">
+              <div class="card-body d-flex justify-content-between align-items-center">
 
 
-                                  <div>
-                                    <h4 class="card-title">
-                                      <%= pizza.PizzaNome %>
-                                    </h4>
-                                    <p class="card-text">
-                                      <%= pizza.Ingredienti %>
-                                    </p>
-                                  </div>
-                                  <div class="vote">
-                                    <%= pizza.Prezzo %> euro
-                                  </div>
-                                </div>
-                              </div>
-                              <p></p>
-                              <% }); %>
-                          </div>
-                      </div>
-                    </div>
+                <div>
+                  <h4 class="card-title">
+                    <%= pizza.PizzaNome %>
+                  </h4>
+                  <p class="card-text">
+                    <%= pizza.Ingredienti %>
+                  </p>
+                </div>
+                <div class="vote">
+                  <%= pizza.Prezzo %> euro
+                </div>
+              </div>
+            </div>
+            <p></p>
+            <% }); %>
+        </div>
+      </div>
+    </div>
 
   </main>
 

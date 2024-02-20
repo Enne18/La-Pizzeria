@@ -26,6 +26,25 @@ exports.getALLPrenotazioni = function (id) {
     });
 };
 
+exports.createPrenotazione = function (preno) {
+    return new Promise((resolve, reject) => {
+        const sql = 'INSERT INTO Prenotazione(NomePrenotazione, NumeroPersone, OrarioPrenotazione, IDPizzeriaPrenotazione, DataPrenotazione) VALUES (?,?,?,?,?)';
+        db.run(sql, [
+            preno.Nome,
+            preno.NPersone,
+            preno.Orario.toUTCString(),
+            preno.ID_Pizzeria,
+            preno.Data.toUTCString()
+        ], function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(preno);
+            }
+        });
+    });
+};
+
 exports.deletePrenotazione = function (preno) {
     return new Promise((resolve, reject) => {
         const sql = 'DELETE FROM Prenotazione WHERE Prenotazione.IDPrenotazione = ?';
