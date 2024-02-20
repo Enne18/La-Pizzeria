@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
 // Controllo dei valori inseriti nel form
 router.post('/', [
   check('nome').notEmpty().withMessage('Inserire il nome della pizzeria'),
-  check('indirizzo').notEmpty().withMessage('Inserire l \'indirizzo della pizzeria'),
+  check('indirizzo').notEmpty().withMessage('Inserire l indirizzo della pizzeria'),
   check('citta').notEmpty().withMessage('Inserire la città dove si trova la pizzeria'),
   check('numero').notEmpty().withMessage('Inserire il numero di telefono della pizzeria'),
   check('GGhhApertura').notEmpty().withMessage('Inserire i giorni e gli orari di apertura della pizzeria'),
@@ -56,7 +56,7 @@ router.post('/', [
 
         console.log(pizzeria);
         pizzeriaDao.insertPizzeria(pizzeria);
-        res.render('index', { title: 'La Pizzeria', auth: false, message: 'Pizzeria creata con successo, fare il login con i dati inseriti per accedere all\'area riservata', prop: 1 });
+        res.render('index', { title: 'La Pizzeria', auth: false, message: 'Pizzeria creata con successo, fare il login con i dati inseriti per accedere all area riservata', prop: 1 });
       });
 
       
