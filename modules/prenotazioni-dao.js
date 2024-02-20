@@ -6,7 +6,7 @@ const db = require('../db.js');
 // ritorna una lista contenente tutte le prenotazioni della pizzeria specificata
 exports.getALLPrenotazioni = function (id) {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT NomePrenotazione, NumeroPersone, OrarioPrenotazione, DataPrenotazione FROM Prenotazione JOIN Pizzeria ON Prenotazione.IDPizzeriaPrenotazione = Pizzeria.ID_Pizzeria WHERE Pizzeria.Prop = ?';
+        const sql = 'SELECT NomePrenotazione, NumeroPersone, OrarioPrenotazione, DataPrenotazione, IDPrenotazione FROM Prenotazione JOIN Pizzeria ON Prenotazione.IDPizzeriaPrenotazione = Pizzeria.ID_Pizzeria WHERE Pizzeria.Prop = ?';
         db.all(sql, [id], (err, rows) => {
             if (err) {
                 reject(err);
@@ -18,7 +18,8 @@ exports.getALLPrenotazioni = function (id) {
                     Nome: e.NomePrenotazione,
                     NPersone: e.NumeroPersone,
                     Orario: e.OrarioPrenotazione,
-                    Data: e.DataPrenotazione
+                    Data: e.DataPrenotazione,
+                    IDPrenotazione: e.IDPrenotazione
                 }));
                 resolve(prenotazioneInfo);
             }
@@ -32,9 +33,9 @@ exports.createPrenotazione = function (preno) {
         db.run(sql, [
             preno.Nome,
             preno.NPersone,
-            preno.Orario.toUTCString(),
+            preno.Orario,
             preno.ID_Pizzeria,
-            preno.Data.toUTCString()
+            preno.Data
         ], function (err) {
             if (err) {
                 reject(err);

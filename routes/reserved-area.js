@@ -91,7 +91,7 @@ router.post('/delete/:IDPren', function (req, res, next) {
   pizzeriaDao.getPizzeriaById(user.id).then((pizzeria) => {
     pren.getALLPrenotazioni(user.id).then((prenotazionis) => {
       const auth = req.isAuthenticated();
-      const prop = user.getUserIsProp(req.user);
+      const prop = userDao.getUserIsProp(req.user);
       res.render('reserved-area', { auth, title: 'Express', pizzeria, prenotazionis, message: null, user, prop});
     });
   });

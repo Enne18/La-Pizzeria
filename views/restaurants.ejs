@@ -11,7 +11,9 @@
           <select class="form-control form-control-aside me-2" placeholder="Filtra città..." name="filter">
             <option value="">Tutte le città</option>
             <% cittaOrdinate.forEach((pizzeria)=> { %>
-              <option value="<%= pizzeria.elencoCitta %>"><%= pizzeria.elencoCitta %></option>
+              <option value="<%= pizzeria.elencoCitta %>">
+                <%= pizzeria.elencoCitta %>
+              </option>
               <% }); %>
           </select>
           <button class="btn btn-danger" type="submit">Filtra</button>
@@ -27,35 +29,36 @@
   </div>
 
 
-    <% pizzerias.forEach((pizzeria)=> { %>
-      <hr>
-      <!-- Elenco Pizzerie -->
-      <div id="app-container" class="bordato">
-        <div class="row">
-          <div class="col-md-1 offset-md-1"></div>
-          <div class="col-md-6" id="cardRestaurantBG">
-            <a class="legenda" href="/detail/<%= pizzeria.ID_Pizzeria %>">
-              <h2>
-                <%= pizzeria.Nome %>
-              </h2>
-              <p>
-                <%= pizzeria.Tipologia %>
-              </p>
-              <p>
-                <%= pizzeria.Città %> - <%= pizzeria.Indirizzo %>
-              </p>
-              <p>Numero di telefono: <%= pizzeria.Telefono %>
-              </p>
-            </a>
-          </div>
-          <div class="col-md-3 d-flex justify-content-end">
-            <div class="image-container">
-              <img src="/images/Pizzeria-Acquapazza-mini.png" alt="Pizzeria-Acquapazza-mini.png" class="img-fluid">
-            </div>
+  <% pizzerias.forEach((pizzeria)=> { %>
+    <hr>
+    <!-- Elenco Pizzerie -->
+    <div id="app-container" class="bordato">
+      <div class="row">
+        <div class="col-md-1 offset-md-1"></div>
+        <div class="col-md-6" id="cardRestaurantBG">
+          <a class="legenda" href="/detail/<%= pizzeria.ID_Pizzeria %>">
+            <h2>
+              <%= pizzeria.Nome %>
+            </h2>
+            <p>
+              <%= pizzeria.Tipologia %>
+            </p>
+            <p>
+              <%= pizzeria.Città %> - <%= pizzeria.Indirizzo %>
+            </p>
+            <p>Numero di telefono: <%= pizzeria.Telefono %>
+            </p>
+          </a>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+          <div class="image-container">
+            <% var randomImageIndex=Math.floor(Math.random() * 4) + 1; %>
+              <img src="/images/Res<%= randomImageIndex %>.png" alt="Restaurant Image" class="img-fluid">
           </div>
         </div>
       </div>
-      <hr>
+    </div>
+    <hr>
     <% }); %>
 
       </div>

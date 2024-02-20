@@ -58,7 +58,6 @@ table {
 }
 
 body {
-  /* background-color: #febd3a; */
   background-image: url("/images/top-view-pizza-circular-frame.jpg");
   background-size: cover;
   backdrop-filter: blur(3px);
@@ -112,11 +111,6 @@ a:hover {
   /* Altezza tra foto e contenuto */
 }
 
-.carousel-item {
-  max-height: 350px;
-  overflow: hidden;
-}
-
 .content-box {
   padding: 30px;
   background-color: #fff;
@@ -155,35 +149,30 @@ footer p {
   max-width: 200px;
   margin-right: 2rem;
   margin-left: auto;
-  max-height: 150px;
   overflow: hidden;
+  object-fit: contain;
 }
 
-/* Stile per il titolo del modal */
 .modal-title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* Stile per il campo del nome */
 #defaultForm-name {
   border: 2px solid #ccc;
   border-radius: 5px;
 }
 
-/* Stile per il campo dell'email */
 #defaultForm-email {
   border: 2px solid #ccc;
   border-radius: 5px;
 }
 
-/* Stile per il campo della password */
 #defaultForm-pass {
   border: 2px solid #ccc;
   border-radius: 5px;
 }
 
-/* Stile per il pulsante di login */
 .btn-default {
   background-color: #007bff;
   color: #fff;
@@ -192,7 +181,6 @@ footer p {
   font-size: 1.2rem;
 }
 
-/* Stile per il pulsante di login al passaggio del mouse */
 .btn-default:hover {
   background-color: #0056b3;
   color: #fff;
@@ -253,13 +241,6 @@ button a:hover {
   text-decoration: none;
 }
 
-/* CSS ordine.html */
-
-/* .ordineHome {
-  text-align: center;
-  margin-top: 100px;
-} */
-
 form {
   max-width: 90%;
   margin: 0 auto;
@@ -313,56 +294,6 @@ input[type="submit"]:hover {
   margin-left: auto;
   margin-right: auto;
 }
-
-/* .registrazioneHome {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 100px;
-}
-
-.registrazioneHome h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.registrazioneHome form {
-  width: 500px;
-}
-
-.registrazioneHome label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.registrazioneHome input,
-.registrazioneHome select,
-.registrazioneHome textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.registrazioneHome input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-}
-
-.registrazioneHome input[type="submit"]:hover {
-  background-color: #45a049;
-}
-
-.registrazioneHome textarea {
-  height: 100px;
-} */
-
-/* .arearegistrata {
-  margin-top: 50px;
-} */
 
 .pizza-fields {
   display: flex;
