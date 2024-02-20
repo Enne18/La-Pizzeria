@@ -38,11 +38,11 @@ router.post('/', [
       const admin = {
         Email: req.body.emailAdmin,
         Password: req.body.pswAdmin,
-        admin: 0,
+        Proprietario: 0,
         NomeUtente: req.body.nome
       }
 
-      user.insertAdmin(admin).then((id) => {
+      userDao.insertAdmin(admin).then((id) => {
         const pizzeria = {
           Nome: req.body.nome,
           Indirizzo: req.body.indirizzo,
@@ -56,11 +56,10 @@ router.post('/', [
 
         console.log(pizzeria);
         pizzeriaDao.insertPizzeria(pizzeria);
+        res.render('index', { title: 'La Pizzeria', auth: false, message: 'Pizzeria creata con successo, fare il login con i dati inseriti per accedere all\'area riservata', prop: 1 });
       });
 
-
-      const prop = userDao.getUserIsProp(req.user);
-      res.render('index', { title: 'La Pizzeria', auth, message: 'Pizzeria creata con successo, fare il login con i dati inseriti per accedere all\'area riservata', prop });
+      
 
 
     } catch (error) {

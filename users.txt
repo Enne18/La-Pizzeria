@@ -1,0 +1,16 @@
+Utente non Amministratore
+
+user: pippo@gmail.com
+psw: 1234
+
+
+Utente Amministratore
+
+user: 5stelle@gmail.com
+psw: 5stelle
+
+user: acquaPazza@gmail.com
+psw: acquapazza
+
+user: pupetta@gmail.com
+psw: pupetta01

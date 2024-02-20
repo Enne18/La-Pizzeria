@@ -14,7 +14,7 @@ router.post('/sessions', function (req, res, next) {
       return next(err);
     }
     if (!user) {
-      return res.render('index', { auth: false, message: 'Utente non esistente' });
+      return res.render('index', { auth: false, message: 'Utente non esistente', prop: 1});
     }
     req.login(user, function (err) {
       if (err) { return next(err); }

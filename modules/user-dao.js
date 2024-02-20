@@ -111,7 +111,7 @@ exports.insertAdmin = function (admin) {
         db.run(sql, [
             admin.Email,
             admin.Password,
-            admin.admin,
+            admin.Proprietario,
             admin.NomeUtente
         ], function (err) {
             if (err)

@@ -18,7 +18,7 @@ router.post('/', [
   if (!errors.isEmpty()) {
     // Campi non validi
     const message = errors.array().map(error => error.msg);
-    return res.render('index', { auth: false, message });
+    return res.render('index', { auth: false, message, prop: 1 });
   } else {
     try {
       // Campi validi, creo nuovo utente
@@ -31,7 +31,7 @@ router.post('/', [
       await userDao.insertUser(user);
       res.redirect('/');
     } catch (error) {
-      return res.render('index', { auth: false, message:'Email già utilizzata' });
+      return res.render('index', { auth: false, message:'Email già utilizzata', prop: 1});
     }
   }
 });
