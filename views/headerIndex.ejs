@@ -54,7 +54,7 @@
           <a class="nav-link" href="/restaurants">Pizzerie</a>
         </li>
         <li class="nav-item">
-          <% if(!auth && prop == 0) { %>
+          <% if(!auth && prop != 0) { %>
             <a class="nav-link" href="#" data-toggle="modal" data-target="#modalReservedAreaForm">Area riservata</a>
           <% } else { %> 
             <a class="nav-link" href="/reserved-area">Area riservata</a>
